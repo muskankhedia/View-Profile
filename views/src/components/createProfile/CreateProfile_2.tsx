@@ -31,7 +31,14 @@ const CreateProfile_: FC<{}> = () => {
             <TextField id="standard-basic" label="Remarks" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
 
             <div style={{ fontWeight: 'bold', margin: '1% 0% 0% 1%' }}>
-              Experience
+              Experience (company-1)
+            </div>
+            <TextField id="standard-basic" label="Company name" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Position" fullWidth={true} variant="outlined"  style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Duration" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Description" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <div style={{ fontWeight: 'bold', margin: '1% 0% 0% 1%' }}>
+              Experience (company-2)
             </div>
             <TextField id="standard-basic" label="Company name" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
             <TextField id="standard-basic" label="Position" fullWidth={true} variant="outlined"  style={{ margin: '1%' }}/>
