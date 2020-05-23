@@ -30,11 +30,12 @@ var firebaseConfig = {
 };
 
 const firestore = firebase.initializeApp(firebaseConfig).firestore();
+var db = firebase.firestore();
 
-const collection =firestore.collection('userdata').get()
+const collection =firestore.collection('profiles').get()
                 .then(snapshot => snapshot.docs.map(doc => ({...doc.data(), id: doc.id })));
 
-const doc = firestore.collection('userdata').doc('details').get()
+const doc = firestore.collection('profiles').doc("1").get()
             .then(item => ({id: item.id, ...item.data()}))
 
 setTimeout(() => {
@@ -45,6 +46,44 @@ setTimeout(() => {
 app.get('/', (_ ,res) => {
 	res.send('this is working');
 });
+
+app.post('/createProfile', (req, res) => {
+    let data = req.body;
+    let doc = db.collection("profiles").doc();
+    data.id = doc.id;
+    doc.set(data);
+    res.send("Added with Id: ", data.id)
+})
+
+app.get('/profile/:id', (req, res) => {
+    let id = req.params.id;
+    db.collection('profiles').doc(id).get()
+    .then((doc) => {
+        var childData = doc.data();
+        res.send({row: childData});
+    })
+})
+
+app.post('/editProfile/:id', (req, res) => {
+    let data = req.body;
+    let doc = db.collection("profiles").doc(id);
+    doc.update(data)
+})
+
+app.get('/profiles', (_, res) => {
+    db.collection('profiles').get()
+    .then((snapshot) => {
+        var rows = [];
+        snapshot.forEach((doc) => {
+            var childData = doc.data();
+            rows.push(childData);
+        });
+        res.send({rows: rows});
+    })
+    .catch((err) => {
+        console.log('Error getting documents', err);
+    });
+})
 
 const server = app.listen(port, url, e => {
 	if(e) throw e;
