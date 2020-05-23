@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Navigator from '../Navigator';
-import Sidebar from './Sidebar';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +32,6 @@ const Base: FC<{}> = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Sidebar />
       <main>
         <Navigator />
       </main>
