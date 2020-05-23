@@ -23,7 +23,7 @@ const Pad: FC<{}> = () => (
 );
 
 const Profiles: FC<{}> = () => {
-  const [state, setState] = React.useState({
+  const [state,] = React.useState({
     columns: [
       { title: 'Name', field: 'name', width: '220', align: 'left' },
       { title: 'Surname', field: 'surname', width: '220', align: 'left' },
@@ -44,7 +44,7 @@ const Profiles: FC<{}> = () => {
       birthCity: 34,
     },
   ]);
-  const [tmp, setTmp] = useState([
+  const [tmp,] = useState([
     { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
     {
       name: 'Zerya Betül',

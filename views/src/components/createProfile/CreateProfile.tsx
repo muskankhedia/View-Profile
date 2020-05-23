@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 
-import { Card, CardContent, FormControl, InputLabel, Input, FormHelperText, Paper, Grid, FormControlLabel, Checkbox, FormLabel, RadioGroup, Radio, FormGroup, Select, MenuItem } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
+import { Paper, Grid } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Form, Field } from 'react-final-form';
