@@ -45,7 +45,8 @@ app.post('/createProfile', (req, res) => {
     data.id = doc.id;
     doc.set(data);
     console.log("data: ", data);
-    res.status(200).send("Added with id:", data.id)
+    console.warn(data.id)
+    res.status(200).send(`Added with id: ${data.id}`)
 })
 
 app.get('/profile/:id', (req, res) => {
