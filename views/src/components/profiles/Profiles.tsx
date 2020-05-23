@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { CardContent, Card } from '@material-ui/core';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
@@ -17,17 +17,12 @@ interface Row {
   birthCity: number;
 }
 
-interface TableState {
-  columns: any;
-  data: Row[];
-}
-
 const Pad: FC<{}> = () => (
   <>&nbsp;&nbsp;&nbsp;&nbsp;</>
 );
 
 const Profiles: FC<{}> = () => {
-  const [state, setState] = React.useState<TableState>({
+  const [state, setState] = React.useState({
     columns: [
       { title: 'Name', field: 'name', width: '220', align: 'left' },
       { title: 'Surname', field: 'surname', width: '220', align: 'left' },
@@ -37,25 +32,47 @@ const Profiles: FC<{}> = () => {
         field: 'birthCity',
         lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },width: '170', align: 'center'
       },
-    ],
-    data: [
-      { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-      {
-        name: 'Zerya Betül',
-        surname: 'Baran',
-        birthYear: 2017,
-        birthCity: 34,
-      },
-    ],
+    ]
   });
+  const [data, setData] = useState([
+    { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+    {
+      name: 'Zerya Betül',
+      surname: 'Baran',
+      birthYear: 2017,
+      birthCity: 34,
+    },
+  ]);
+  const [tmp, setTmp] = useState([
+    { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+    {
+      name: 'Zerya Betül',
+      surname: 'Baran',
+      birthYear: 2017,
+      birthCity: 34,
+    },
+  ]);
+
+  const filterRows = (text: string) => {
+    if (text.length === 0) {
+      setData(tmp);
+      return;
+    }
+    const rows: any = [];
+    for (const r of data) {
+      if (r.name.includes(text)) {
+        rows.push(r);
+      }
+    }
+    setData(rows);
+  };
   return (
     <Card>
       <CardContent>
         <h3>Profiles</h3>
         <hr />
         <div style={{ margin: '1%', flexDirection: 'column' }}>
-          <span style={{ flex: 3 }}>Filter: </span>
-          <TextField id="standard-basic" label="Standard" style={{ flex: 10 }} />
+          <TextField id="standard-basic" label="Filter name" fullWidth={true} onChange={(e) => filterRows(e.target.value)} />
         </div>
         <TableContainer style={{ maxHeight: '100vh', overflowY: 'hidden' }}>
           <Table stickyHeader>
@@ -78,22 +95,22 @@ const Profiles: FC<{}> = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {state.data.map((data, i) => (
+              {data.map((d, i) => (
                 <TableRow className="table-data-row" key={i}>
                 <TableCell style={{ minWidth: 220, fontSize: 16 }} align="left">
-                  {data.name}
+                  {d.name}
                 </TableCell>
                 <TableCell
                   style={{ minWidth: 220, fontSize: 16 }}
                   align="left"
                 >
-                  {data.surname}
+                  {d.surname}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
-                  {data.birthYear}
+                  {d.birthYear}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
-                  {data.birthCity}
+                  {d.birthCity}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
                   <Button variant="contained" color="primary">View</Button>
@@ -107,7 +124,6 @@ const Profiles: FC<{}> = () => {
         </TableContainer>
       </CardContent>
     </Card>
-    
   );
 };
 
