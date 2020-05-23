@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Link } from "react-router-dom";
 import { Form, Field } from 'react-final-form';
 
 interface Values{
@@ -20,7 +19,7 @@ const onSubmit = async (values: any) => {
     console.log("Form Data: ", values)
   };
 
-const CreateProfile: FC<{Values}> = () => {
+const CreateProfile: FC<Values> = () => {
   return (
     <Form 
     onSubmit={onSubmit}
@@ -70,7 +69,7 @@ const CreateProfile: FC<{Values}> = () => {
             </Grid>
           </Grid>
         </Paper>
-        <pre>{JSON.stringify(values, 0, 2)}</pre>
+        <pre>{JSON.stringify(values)}</pre>
       </form>
     
     )}

@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { Link } from "react-router-dom";
 
 
 interface Row {
@@ -71,6 +72,11 @@ const Profiles: FC<{}> = () => {
       <CardContent>
         <h3>Profiles</h3>
         <hr />
+        <div>
+          <Link to="/createProfile">
+          <Button variant="contained" color="primary">Create Profile</Button>
+          </Link>
+        </div>
         <div style={{ margin: '1%', flexDirection: 'column' }}>
           <TextField id="standard-basic" label="Filter name" fullWidth={true} onChange={(e) => filterRows(e.target.value)} />
         </div>
@@ -115,7 +121,7 @@ const Profiles: FC<{}> = () => {
                 <TableCell style={{ minWidth: 170 }} align="center">
                   <Button variant="contained" color="primary">View</Button>
                   <Pad />
-                  <Button variant="contained" color="secondary"  component={Link} to="/createprofile">Edit</Button>
+                  <Button variant="contained" color="secondary">Edit</Button>
                 </TableCell>
               </TableRow>
               ))}

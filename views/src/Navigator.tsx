@@ -10,7 +10,7 @@ const Navigator: FC<{}> = () => (
     <Switch>
       <Route exact={true} path="/" component={Login}  />
       <Route exact={true} path="/profiles" component={Profiles}  />
-      <Route exact={true} path="/createprofile" component={CreateProfile}  />
+      <Route exact={true} path="/createProfile" component={CreateProfile}  />
     </Switch>
   </Router>
 );
