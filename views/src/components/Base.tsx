@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +26,7 @@ const Base: FC<{}> = () => {
   const classes = useStyles();
   return (
     <div>
+      <header>
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -32,9 +34,12 @@ const Base: FC<{}> = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <main>
-        <Navigator />
-      </main>
+      </header>
+      <Container style={{ marginTop: '10vh' }}>
+        <main>
+          <Navigator />
+        </main>
+      </Container>
     </div>
   );
 };
