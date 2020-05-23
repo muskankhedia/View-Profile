@@ -7,9 +7,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 
-const Login: FC<{}> = () => {
+interface LoginProps {
+  updateLogin(status: boolean): void;
+}
+
+const Login: FC<LoginProps> = ({ updateLogin }) => {
   return (
-    <Card style={{ margin: '20vh 50vh 50vh 50vh', flexGrow: 1, textAlign: 'center' }}>
+    <Card style={{ margin: '20vh 30vh 50vh 30vh', flexGrow: 1, textAlign: 'center' }}>
       <CardContent>
         <AppBar position="static">
           <Typography variant="h4" style={{ padding: '2%' }}>
@@ -21,7 +25,7 @@ const Login: FC<{}> = () => {
           <TextField id="outlined-basic" label="Password" type="password" variant="outlined" style={{ width: '80vh' }} />
         </div>
         <Link to="/profiles" replace>
-        <Button variant="contained" color="primary">Login</Button>
+        <Button variant="contained" color="primary" onClick={() => updateLogin(true)} >Login</Button>
         </Link>
       </CardContent>
     </Card>

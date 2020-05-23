@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { CardContent, Card } from '@material-ui/core';
+import { CardContent, Card, Container } from '@material-ui/core';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -70,10 +70,11 @@ const Profiles: FC<{}> = () => {
   return (
     <Card>
       <CardContent>
+        <Container>
         <h3>Profiles</h3>
         <hr />
         <div>
-          <Link to="/createProfile">
+          <Link to="/createProfile" style={{ textDecoration: 'none' }}>
           <Button variant="contained" color="primary">Create Profile</Button>
           </Link>
         </div>
@@ -128,6 +129,7 @@ const Profiles: FC<{}> = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        </Container>
       </CardContent>
     </Card>
   );
