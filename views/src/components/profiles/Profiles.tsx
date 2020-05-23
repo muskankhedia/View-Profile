@@ -98,7 +98,7 @@ const Profiles: FC<{}> = () => {
                 <TableCell style={{ minWidth: 170 }} align="center">
                   <Button variant="contained" color="primary">View</Button>
                   <Pad />
-                  <Button variant="contained" color="secondary">Edit</Button>
+                  <Button variant="contained" color="secondary"  component={Link} to="/createprofile">Edit</Button>
                 </TableCell>
               </TableRow>
               ))}
