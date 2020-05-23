@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { Card, CardContent, Container } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from "react-router-dom";
 
 const CreateProfile_: FC<{}> = () => {
   return (
@@ -39,7 +40,9 @@ const CreateProfile_: FC<{}> = () => {
             <hr/>
             <Button variant="contained" color="primary">Submit</Button>
             &nbsp;&nbsp;&nbsp;
-            <Button variant="contained" color="secondary">Cancel</Button>
+            <Link to="/profiles" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="secondary">Cancel</Button>
+            </Link>
           </form>
         </Container>
       </CardContent>
