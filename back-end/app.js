@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const express = require('express'),
-	bodyParser = require('body-parser'),
+    bodyParser = require('body-parser'),
 	app = express(),
 	port = process.env.PORT || 5000,
     url = '0.0.0.0',
@@ -10,6 +10,9 @@ const express = require('express'),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended:true,
+}));
+app.use(express.text({
+    type: "text/plain"
 }));
 
 app.use((_,res,next)=>{
@@ -29,30 +32,20 @@ var firebaseConfig = {
     measurementId: "G-VBCBJFGMDL"
 };
 
-const firestore = firebase.initializeApp(firebaseConfig).firestore();
-var db = firebase.firestore();
-
-const collection =firestore.collection('profiles').get()
-                .then(snapshot => snapshot.docs.map(doc => ({...doc.data(), id: doc.id })));
-
-const doc = firestore.collection('profiles').doc("1").get()
-            .then(item => ({id: item.id, ...item.data()}))
-
-setTimeout(() => {
-    console.log("collection: ", collection);
-    console.log("doc: ", doc);
-}, 10000);
+const db = firebase.initializeApp(firebaseConfig).firestore();
 
 app.get('/', (_ ,res) => {
-	res.send('this is working');
+	res.status(200).send('this is working');
 });
 
 app.post('/createProfile', (req, res) => {
-    let data = req.body;
+    console.log("req: ", req.body)
+    let data = {};
     let doc = db.collection("profiles").doc();
     data.id = doc.id;
     doc.set(data);
-    res.send("Added with Id: ", data.id)
+    console.log("data: ", data);
+    res.status(200).send("Added with id:", data.id)
 })
 
 app.get('/profile/:id', (req, res) => {
@@ -60,7 +53,7 @@ app.get('/profile/:id', (req, res) => {
     db.collection('profiles').doc(id).get()
     .then((doc) => {
         var childData = doc.data();
-        res.send({row: childData});
+        res.status(200).send({row: childData});
     })
 })
 
@@ -78,12 +71,17 @@ app.get('/profiles', (_, res) => {
             var childData = doc.data();
             rows.push(childData);
         });
-        res.send({rows: rows});
+        res.status(200).send({rows: rows});
     })
     .catch((err) => {
         console.log('Error getting documents', err);
     });
 })
+
+app.get('/delete', (req, res) => {
+    db.collection('profiles').doc(req.query.id).delete();
+    res.status(200).send("Deleted")
+});
 
 const server = app.listen(port, url, e => {
 	if(e) throw e;
