@@ -4,7 +4,7 @@ import { Card, CardContent, Container } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
-import { HOST } from '../../utils/utils'
+import { HOST } from '../../utils/utils';
 
 const CreateProfile: FC<{}> = () => {
   const [formState, setFormState] = useState({
