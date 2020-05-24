@@ -49,11 +49,7 @@ app.post('/login', (req, res) => {
             if (username == childData.id && password == childData.pass){
                 res.status(200).send({status: 200, data: {message: 'LoggedIn'}});
             } else {
-<<<<<<< HEAD
-                res.status(300).send({status: 300, data: {message: 'Invalid'}})
-=======
                 res.status(300).send({message: 'Invalid login'})
->>>>>>> 03f8b600e0541c3153036ed2ae61e19a1e0058f7
             }
         })
 })
