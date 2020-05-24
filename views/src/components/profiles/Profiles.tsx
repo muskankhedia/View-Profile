@@ -128,7 +128,7 @@ const Profiles: FC<{}> = () => {
                   {d.status}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
-                  <Link to={`/showProfile/${d.id}`}>
+                  <Link to={`/profile/${d.firstName}/${d.id}`}>
                   <Button variant="contained" color="primary">View</Button>
                   </Link>
                   <Pad />
