@@ -47,7 +47,7 @@ app.post('/login', (req, res) => {
             var childData = doc.data();
             console.log("childData idpass:", childData);
             if (username == childData.id && password == childData.pass){
-                res.status(200).send(`{message: LoggedIn}`);
+                res.status(200).send({message: 'LoggedIn'});
             } else {
                 res.status(404).send(`{message: Invalid login}`)
             }
