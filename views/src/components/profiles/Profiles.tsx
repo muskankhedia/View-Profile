@@ -123,7 +123,9 @@ const Profiles: FC<{}> = () => {
                   {d.status}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
+                  <Link to={`/showProfile/${data.id}`}>
                   <Button variant="contained" color="primary">View</Button>
+                  </Link>
                   <Pad />
                   <Button variant="contained" color="secondary">Edit</Button>
                 </TableCell>

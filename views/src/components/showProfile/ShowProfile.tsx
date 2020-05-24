@@ -3,8 +3,13 @@ import React, { FC, useState, useEffect } from 'react';
 import { Card, CardContent } from '@material-ui/core';
 import { HOST } from '../../utils/utils';
 
-const ShowProfile: FC<{}> = () => {
+interface ShowProfileProps {
+  pId: string
+}
+
+const ShowProfile: FC<ShowProfileProps> = ({pId}) => {
   
+    console.log("pid: ", pId)
     const [profileData, setProfileData] = useState<any>({
       id: '',
       name: ''

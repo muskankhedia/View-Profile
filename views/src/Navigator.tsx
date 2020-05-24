@@ -19,7 +19,7 @@ const Navigator: FC<NavigatorProps> = ({ updateLogin }) => (
       <Route exact={true} path="/login" component={Login} />
       <Route exact={true} path="/profiles" component={Profiles} />
       <Route exact={true} path="/createProfile" component={CreateProfile} />
-      <Route exact={true} path="/showProfile" component={ShowProfile} />
+      <Route exact={true} path="/showProfile/:id" component={ShowProfile} />
     </Switch>
   </Router>
 );
