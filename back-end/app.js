@@ -35,7 +35,7 @@ var firebaseConfig = {
 const db = firebase.initializeApp(firebaseConfig).firestore();
 
 app.get('/', (_ ,res) => {
-	res.status(200).send('this is working');
+	res.status(200).send({message: 'this is working'});
 });
 
 app.post('/login', (req, res) => {
@@ -49,20 +49,21 @@ app.post('/login', (req, res) => {
             if (username == childData.id && password == childData.pass){
                 res.status(200).send({status: 200, data: {message: 'LoggedIn'}});
             } else {
+<<<<<<< HEAD
                 res.status(300).send({status: 300, data: {message: 'Invalid'}})
+=======
+                res.status(300).send({message: 'Invalid login'})
+>>>>>>> 03f8b600e0541c3153036ed2ae61e19a1e0058f7
             }
         })
 })
 
 app.post('/createProfile', (req, res) => {
-    console.log("req: ", req.body)
-    let data = {};
+    let data = req.body;
     let doc = db.collection("profiles").doc();
     data.id = doc.id;
     doc.set(data);
-    console.log("data: ", data);
-    console.warn(data.id)
-    res.status(200).send(`Added with id: ${data.id}`)
+    res.status(200).send({data_id: data.id})
 })
 
 app.get('/profile/:id', (req, res) => {
@@ -97,7 +98,7 @@ app.get('/profiles', (_, res) => {
 
 app.get('/delete', (req, res) => {
     db.collection('profiles').doc(req.query.id).delete();
-    res.status(200).send("Deleted")
+    res.status(200).send({message: 'Deleted'})
 });
 
 const server = app.listen(port, url, e => {
