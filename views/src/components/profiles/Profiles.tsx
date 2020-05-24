@@ -25,7 +25,12 @@ const Pad: FC<{}> = () => (
 
 const Profiles: FC<{}> = () => {
 
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<any>([{
+    firstName: 'Muskan',
+    lastName: 'Khedia',
+    company: 'a',
+    status: 'a'
+  }]);
 
   const [state,] = React.useState({
     columns: [
@@ -40,8 +45,8 @@ const Profiles: FC<{}> = () => {
     async function fetchData(url: string) {
       const r = await fetch(url);
       const inJSON = (await r.json()) as any;
-      console.warn(inJSON)
-      setData(inJSON.row);
+      console.warn('fgfgfgfgfg', inJSON.rows)
+      setData(inJSON.rows);
       console.log('data: ', data);
     }
     fetchData(`${HOST}/profiles`)
@@ -105,7 +110,7 @@ const Profiles: FC<{}> = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((d: any, i: any) => (
+              {data === undefined ? null : data.map((d: any, i: any) => (
                 <TableRow className="table-data-row" key={i}>
                 <TableCell style={{ minWidth: 220, fontSize: 16 }} align="left">
                   {d.firstName}
