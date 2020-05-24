@@ -1,77 +1,60 @@
 import React, { FC } from 'react';
 
-import { Paper, Grid } from '@material-ui/core';
+import { Card, CardContent, Container } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Form, Field } from 'react-final-form';
+import { Link } from "react-router-dom";
 
-interface Values{
-    firstName: string;
-    lastName: string;
-    email: string;
-}
-
-const onSubmit = async (values: any) => {
-    const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
-    await sleep(300);
-    console.log("Form Data: ", values)
-  };
-
-const CreateProfile: FC<Values> = () => {
+const CreateProfile: FC<{}> = () => {
   return (
-    <Form 
-    onSubmit={onSubmit}
-    initialValues={{ employed: true, stooge: 'larry' }}
-    render={({ handleSubmit, values }) => (
-      <form onSubmit={handleSubmit}>
-        <Paper style={{ padding: 16 }}>
-          <Grid container alignItems="flex-start" spacing={2}>
-            <Grid item xs={6}>
-              <Field
-                fullWidth
-                required
-                name="firstName"
-                component={TextField}
-                type="text"
-                label="First Name"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Field
-                fullWidth
-                required
-                name="lastName"
-                component={TextField}
-                type="text"
-                label="Last Name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="email"
-                fullWidth
-                required
-                component={TextField}
-                type="email"
-                label="Email"
-              />
-            </Grid>
-            <Grid item style={{ marginTop: 16 }}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
-        <pre>{JSON.stringify(values)}</pre>
-      </form>
-    
-    )}
-    />
-  )};
+    <Card>
+      <CardContent>
+        <Container>
+          <h3>Create Profile</h3>
+          <hr />
+          <form noValidate autoComplete="off" style={{ margin: '1%' }}>
+            <div style={{ fontWeight: 'bold', margin: '1% 0% 0% 1%' }}>
+              General
+            </div>
+            <TextField id="standard-basic" label="First name" fullWidth={true} variant="outlined" style={{ margin: '1%' }} />
+            <TextField id="standard-basic" label="Last name" fullWidth={true} variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Company" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Status" fullWidth={true} variant="outlined"  style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Youtube link" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Github link" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <div style={{ fontWeight: 'bold', margin: '1% 0% 0% 1%' }}>
+              Education
+            </div>
+            <TextField id="standard-basic" label="Course" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="University name" fullWidth={true} variant="outlined"  style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="City" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Remarks" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+
+            <div style={{ fontWeight: 'bold', margin: '1% 0% 0% 1%' }}>
+              Experience (company-1)
+            </div>
+            <TextField id="standard-basic" label="Company name" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Position" fullWidth={true} variant="outlined"  style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Duration" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Description" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <div style={{ fontWeight: 'bold', margin: '1% 0% 0% 1%' }}>
+              Experience (company-2)
+            </div>
+            <TextField id="standard-basic" label="Company name" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Position" fullWidth={true} variant="outlined"  style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Duration" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <TextField id="standard-basic" label="Description" fullWidth={true}  variant="outlined" style={{ margin: '1%' }}/>
+            <hr/>
+            <Button variant="contained" color="primary">Submit</Button>
+            &nbsp;&nbsp;&nbsp;
+            <Link to="/profiles" style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="secondary">Cancel</Button>
+            </Link>
+          </form>
+        </Container>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default CreateProfile;
