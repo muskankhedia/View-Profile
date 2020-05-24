@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { CardContent, Card, Container } from '@material-ui/core';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Link } from "react-router-dom";
+import { HOST } from '../../utils/utils';
 
 
 interface Row {
@@ -23,34 +24,36 @@ const Pad: FC<{}> = () => (
 );
 
 const Profiles: FC<{}> = () => {
+
+  const [data, setData] = useState<any>([]);
+
   const [state,] = React.useState({
     columns: [
-      { title: 'Name', field: 'name', width: '220', align: 'left' },
-      { title: 'Surname', field: 'surname', width: '220', align: 'left' },
-      { title: 'Birth Year', field: 'birthYear', type: 'numeric', width: '170', align: 'center' },
-      {
-        title: 'Birth Place',
-        field: 'birthCity',
-        lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },width: '170', align: 'center'
-      },
+      { title: 'Name', field: 'firstName', width: '220', align: 'left' },
+      { title: 'Surname', field: 'lastName', width: '220', align: 'left' },
+      { title: 'Company', field: 'company', width: '220', align: 'left' },
+      { title: 'Status', field:'status', width: '220', align: 'left'},
     ]
   });
-  const [data, setData] = useState([
-    { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-    {
-      name: 'Zerya Betül',
-      surname: 'Baran',
-      birthYear: 2017,
-      birthCity: 34,
-    },
-  ]);
+
+  useEffect(() => {
+    async function fetchData(url: string) {
+      const r = await fetch(url);
+      const inJSON = (await r.json()) as any;
+      console.warn(inJSON)
+      setData(inJSON.row);
+      console.log('data: ', data);
+    }
+    fetchData(`${HOST}/profiles`)
+  }, [])
+
   const [tmp,] = useState([
     { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
     {
-      name: 'Zerya Betül',
-      surname: 'Baran',
-      birthYear: 2017,
-      birthCity: 34,
+      firstName: 'Muskan',
+      lastName: 'Khedia',
+      company: 'a',
+      status: 'a'
     },
   ]);
 
@@ -102,22 +105,22 @@ const Profiles: FC<{}> = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((d, i) => (
+              {data.map((d: any, i: any) => (
                 <TableRow className="table-data-row" key={i}>
                 <TableCell style={{ minWidth: 220, fontSize: 16 }} align="left">
-                  {d.name}
+                  {d.firstName}
                 </TableCell>
                 <TableCell
                   style={{ minWidth: 220, fontSize: 16 }}
                   align="left"
                 >
-                  {d.surname}
+                  {d.lastName}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
-                  {d.birthYear}
+                  {d.company}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
-                  {d.birthCity}
+                  {d.status}
                 </TableCell>
                 <TableCell style={{ minWidth: 170 }} align="center">
                   <Button variant="contained" color="primary">View</Button>

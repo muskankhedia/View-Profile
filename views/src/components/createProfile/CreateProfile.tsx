@@ -43,7 +43,7 @@ const CreateProfile: FC<{}> = () => {
         course: formState.course,
         universityName: formState.universityName,
         city: formState.city,
-        remoarks: formState.remarks,
+        remarks: formState.remarks,
         company1: formState.companyName1,
         position1: formState.position1,
         duration1: formState.duration1,
