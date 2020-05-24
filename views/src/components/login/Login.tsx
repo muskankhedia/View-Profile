@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Card, CardContent } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,12 +6,33 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
+import { HOST } from '../../utils/utils';
 
 interface LoginProps {
   updateLogin(status: boolean): void;
 }
 
 const Login: FC<LoginProps> = ({ updateLogin }) => {
+  const [formState, setFormState] = useState({
+    username: '',
+    password: ''
+  });
+  const submit = () => {
+    console.warn(formState);
+    fetch(`${HOST}/login`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        username: formState.username,
+        password: formState.password
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.warn(res)
+    })
+    updateLogin(true)
+  };
   return (
     <Card style={{ margin: '20vh 30vh 50vh 30vh', flexGrow: 1, textAlign: 'center' }}>
       <CardContent>
@@ -21,12 +42,12 @@ const Login: FC<LoginProps> = ({ updateLogin }) => {
           </Typography>
         </AppBar>
         <div style={{ margin: '5%' }}>
-          <TextField id="outlined-basic" label="Username" type="text" variant="outlined" style={{ width: '80vh', marginBottom: '5%' }} />
-          <TextField id="outlined-basic" label="Password" type="password" variant="outlined" style={{ width: '80vh' }} />
+          <TextField id="outlined-basic" label="Username" type="text" variant="outlined" style={{ width: '80vh', marginBottom: '5%' }} onChange={(e) => setFormState({ ...formState, username: e.target.value })} />
+          <TextField id="outlined-basic" label="Password" type="password" variant="outlined" style={{ width: '80vh' }} onChange={(e) => setFormState({ ...formState, password: e.target.value })} />
         </div>
-        <Link to="/profiles" replace>
-        <Button variant="contained" color="primary" onClick={() => updateLogin(true)} >Login</Button>
-        </Link>
+        {/* <Link to="/profiles" replace> */}
+        <Button variant="contained" color="primary" onClick={() => submit()} >Login</Button>
+        {/* </Link> */}
       </CardContent>
     </Card>
   );
