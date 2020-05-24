@@ -38,6 +38,22 @@ app.get('/', (_ ,res) => {
 	res.status(200).send('this is working');
 });
 
+app.post('/login', (req, res) => {
+    let data = req.body;
+    let username = data.username;
+    let password = data.password;
+    db.collection('logindetails').doc('idpass').get()
+        .then((doc) => {
+            var childData = doc.data();
+            console.log("childData idpass:", childData);
+            if (username == childData.id && password == childData.pass){
+                res.status(200).send(`{message: LoggedIn}`);
+            } else {
+                res.status(404).send(`{message: Invalid login}`)
+            }
+        })
+})
+
 app.post('/createProfile', (req, res) => {
     console.log("req: ", req.body)
     let data = {};
