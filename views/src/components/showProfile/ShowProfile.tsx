@@ -3,13 +3,9 @@ import React, { FC, useState, useEffect } from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { HOST } from '../../utils/utils';
 
-interface ShowProfileProps {
-  pId: string
-}
-
-const ShowProfile: FC<ShowProfileProps> = ({pId}) => {
-  
-    console.log("pid: ", pId)
+const ShowProfile: FC<{}> = () => {
+    const pid = document.URL.substring(document.URL.lastIndexOf('/')+1);
+    console.log("pid: ", pid)
     const [profileData, setProfileData] = useState<any>({
       id: '',
       name: ''
@@ -19,7 +15,7 @@ const ShowProfile: FC<ShowProfileProps> = ({pId}) => {
         const r = await fetch(url);
         const inJSON = (await r.json()) as any;
         console.warn(inJSON)
-        setProfileData(inJSON.row);
+        setProfileData(inJSON.rows);
       }
       fetchData(`${HOST}/profile/1`)
     }, [])
@@ -28,7 +24,7 @@ const ShowProfile: FC<ShowProfileProps> = ({pId}) => {
       <Card style={{ margin: '20vh 30vh 50vh 30vh', flexGrow: 1, textAlign: 'center' }}>
         <CardContent>
           <Typography variant="h1" component="h2"> General</Typography>
-          <div>First Name: {profileData.firstName}</div>
+          {/* <div>First Name: {profileData.firstName}</div>
           <div>Last Name: {profileData.lastName}</div>
           <div>Company: {profileData.company}</div>
           <div>Status: {profileData.status}</div>
@@ -51,7 +47,7 @@ const ShowProfile: FC<ShowProfileProps> = ({pId}) => {
           <div>Company Name: {profileData.company2}</div>
           <div>Position: {profileData.position2}</div>
           <div>Duration: {profileData.duration2}</div>
-          <div>Description: {profileData.description2}</div>
+          <div>Description: {profileData.description2}</div> */}
 
         </CardContent>
       </Card>
