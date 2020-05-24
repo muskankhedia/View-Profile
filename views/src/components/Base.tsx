@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { Link, useHistory } from "react-router-dom";
+import { CLIENT } from '../utils/utils';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,11 +25,22 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Base: FC<{}> = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const updateLogin = (status: boolean) => {
     setIsLoggedIn(status);
   };
+  const profiles = () => {
+    window.location.href = `${CLIENT}/#/profiles`;
+  };
+  const createProfile = () => {
+    window.location.href = `${CLIENT}/#/createProfile`;
+  };
+  const resetLogin = (status: boolean) => {
+    setIsLoggedIn(status);
+    window.location.href = `${CLIENT}/#/login`;
+  }
   return (
     <div>
       <header>
@@ -38,9 +51,9 @@ const Base: FC<{}> = () => {
           </Typography>
           {isLoggedIn ? (
             <>
-              <Button color="inherit">Create Profile</Button>
-              <Button color="inherit">Profiles</Button>
-              <Button color="inherit">Logout</Button>
+              <Button color="inherit" onClick={() => createProfile()}>Create Profile</Button>
+              <Button color="inherit" onClick={() => profiles()}>Profiles</Button>
+              <Button color="inherit" onClick={() => resetLogin(false)} >Logout</Button>
             </>
           ): null}
           
